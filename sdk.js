@@ -68,7 +68,7 @@ function call_solomo(
   document.body.appendChild(div);
 }
 
-function agenda_solomo(agence_id, ref_interne,options={ theme_logo: "dark", bgcolor: "green", color: "#fff" }) {
+function agenda_solomo(agence_id, ref_interne,options={ theme_logo: "light", bgcolor: "#2ba73f", color: "#fff" }) {
   wwwroot = "https://agendasolomo.com";  
   window.addEventListener("load", () => {
     let endpoint = wwwroot + "/biens/check/" + agence_id;
