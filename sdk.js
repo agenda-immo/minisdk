@@ -49,7 +49,7 @@ function call_solomo(data, options) {
   img_src = CDN_URL + img_src;
   let button_code =
     "<div style='" +
-    options.styles.container +
+    options.styles_container +
     "'><a target='_blank' href='" +
     wwwroot +
     "/rdvs/rdv/" +
@@ -59,12 +59,12 @@ function call_solomo(data, options) {
     ";color:" +
     options.color +
     ";" +
-    options.styles.button +
+    options.styles_button +
     "'>" +
     "<img src='" +
     img_src +
     "' style='" +
-    options.styles.icon +
+    options.styles_icon +
     "'> " +
     options.text +
     "</a></div>";
@@ -73,7 +73,16 @@ function call_solomo(data, options) {
   document.body.appendChild(div);
 }
 
-function agenda_solomo(agence_id, ref_interne, options = default_options) {
+function agenda_solomo(agence_id, ref_interne, user_options = false) {
+  let options;
+  if(user_options ===  false) options = default_options;
+  else {
+    options = default_options;
+    Object.keys(user_options).forEach(key => {
+      options[key] = user_options[key];      
+    });
+  }
+
   wwwroot = "https://agendasolomo.com";
   window.addEventListener("load", () => {
     let endpoint = wwwroot + "/biens/check/" + agence_id;
@@ -85,13 +94,11 @@ function agenda_solomo(agence_id, ref_interne, options = default_options) {
 }
 
 const default_options = {
-  styles: {
-    container:
+  styles_container:
       "position:absolute;width: 380px;height:100px;top:75px;right:0px;z-index:999",
-    button:
+  styles_button:
       "border-radius:60px 0px 0px 60px;text-decoration:none;padding: 0 15px;text-align: center;display: flex;align-items: center;justify-content: space-around;font-size: 25px;font-family: Arial;font-weight: bolder;",
-    icon: "width: 28%; height: auto;",
-  },
+  styles_icon: "width: 28%; height: auto;",  
   text: "RENDEZ-VOUS VISITE",
   theme_logo: "light",
   bgcolor: "#ff2127",
