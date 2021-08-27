@@ -1,7 +1,7 @@
 /**************
  * SDK SolomoBooking
- * version : 0.4
- * date : 16/08/2021
+ * version : 0.5
+ * date : 27/08/2021
  */
 
 function solomo_xhr(type, url, data, options) {
@@ -34,44 +34,66 @@ function solomo_parse(text) {
   }
 }
 
-function call_solomo(
-  data,
-  options 
-) {
+function call_solomo(data, options) {
   if (data.bien_id === false) return; // no corresponding URL
   let img_src;
   switch (options.theme_logo) {
     case "dark":
-      img_src = "logo-solomoB.svg";
+      img_src = "logo-solomoB.png";
       break;
     case "light":
-      img_src = "logo-solomoW.svg";
+      img_src = "logo-solomoW.png";
       break;
   }
   const CDN_URL = "https://cdn.jsdelivr.net/gh/agenda-immo/minisdk@main/";
-
   img_src = CDN_URL + img_src;
   let button_code =
-    "<div style='position:absolute;width: 158px;height:100px;bottom:75px;right:35px;'><a target='_blank' href='" +
+    "<div style='" +
+    options.styles.container +
+    "'><a target='_blank' href='" +
     wwwroot +
     "/rdvs/rdv/" +
     data.bien_id +
-    "' style='text-decoration:none;background-color: " +
+    "' style='background-color: " +
     options.bgcolor +
     ";color:" +
     options.color +
-    ";padding: 15px;text-align: center;border-radius: 10px;display: flex;align-items: end;justify-content: space-around;'><img src='" +
+    ";" +
+    options.styles.button +
+    "'>" +
+    "<img src='" +
     img_src +
-    "' style='width: 19%; height: auto;'> Prendre RDV</a></div>";
+    "' style='" +
+    options.styles.icon +
+    "'> " +
+    options.text +
+    "</a></div>";
   let div = document.createElement("div");
   div.innerHTML = button_code;
   document.body.appendChild(div);
 }
 
-function agenda_solomo(agence_id, ref_interne,options={ theme_logo: "light", bgcolor: "#2ba73f", color: "#fff" }) {
-  wwwroot = "https://agendasolomo.com";  
+function agenda_solomo(agence_id, ref_interne, options = default_options) {
+  wwwroot = "https://agendasolomo.com";
   window.addEventListener("load", () => {
     let endpoint = wwwroot + "/biens/check/" + agence_id;
-    solomo_xhr("POST", endpoint, "u=" + ref_interne, { success: (r)=>call_solomo(r,options) });
+    call_solomo({ bien_id: 842 }, options);
+    solomo_xhr("POST", endpoint, "u=" + ref_interne, {
+      success: (r) => call_solomo(r, options),
+    });
   });
 }
+
+const default_options = {
+  styles: {
+    container:
+      "position:absolute;width: 380px;height:100px;top:75px;right:0px;z-index:999",
+    button:
+      "border-radius:60px 0px 0px 60px;text-decoration:none;padding: 0 15px;text-align: center;display: flex;align-items: center;justify-content: space-around;font-size: 25px;font-family: Arial;font-weight: bolder;",
+    icon: "width: 28%; height: auto;",
+  },
+  text: "RENDEZ-VOUS VISITE",
+  theme_logo: "light",
+  bgcolor: "#ff2127",
+  color: "#fff",
+};
