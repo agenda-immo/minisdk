@@ -1,21 +1,61 @@
-<html>
-<body>
-    <div style="padding:25px 50px">
-<h1>Documentation</h1>
-<h2>Objet du SDK</h2>
-<p>Le SDK permet d'afficher dans votre page le bouton de prise de rendez-vous AgendaSolomo pour le bien affich&eacute;.</p>
-<h2>Installation</h2>
-<p>Sa mise est place est tr&egrave;s simple :</p>
-<p>1. Inclure le script dans votre page : <br>
-    <code>&lt;script type="text/javascript" src="https://cdn.jsdelivr.net/gh/agenda-immo/minisdk@main/sdk.min.js"&gt;&lt;/script&gt;</code>
-    
-    
-    
-    <br />2. Lancer le script de la fa&ccedil;on suivante : <br /><code>&lt;script type="text/javascript"&gt;agenda_solomo(agence_id,reference_interne);&lt;/script&gt;</code></p>
-<p>o&ugrave; :<br />- "<strong>agence_id</strong>" est l'identifiant qui vous a &eacute;t&eacute; fourni lors de votre inscription<br />- "<strong>reference_interne</strong>" est &eacute;gal &agrave; la r&eacute;f&eacute;rence pass&eacute;e lors de l'import du bien via le webservice AgendaSolomo (ou le numero de mandat si le bien a &eacute;t&eacute; import&eacute; par le webservice de Apimo)</p>
-<h2><br />IMPORTANT</h2>
+<h1 style="margin-top: 50px;">Intégration du bouton de prise de rendez-vous à votre CMS existant</h1>
+<p>
+Le SDK que nous fournissons permet d'afficher automatiquement le bouton de prise de rendez-vous AgendaSolomo pour un bien spécifique. 
+<br>Afin d'avoir une version toujours à jour,
+ il est fortement conseillé d'inclure le SDK à partir du CDN (https://cdn.jsdelivr.net/gh/agenda-immo/minisdk@main/sdk.min.js). A défaut, vous pouvez le télécharger <a href="https://github.com/agenda-immo/minisdk">sur GitHub</a> </p>
+<div class="panel-group heading-facture" role="tablist" aria-multiselectable="true" style="margin-top: 10px;">
+                    <div class="panel panel-default">                    
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#facture2018" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                Comment mettre en place le SDK AgendaSolomo?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="facture2018" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
+                            <div class="panel-body"> 
+                              <p>
+                              
+Sa mise est place est très simple : 
+<ol style="margin-left:15px">
+<li>Inclure le script dans votre page, de préférence en passant par le CDN : <br>
+<code>&lt;script type="text/javascript" src="https://cdn.jsdelivr.net/gh/agenda-immo/minisdk@main/sdk.min.js"&gt;&lt;/script&gt;</code>
+</li>
+<li>
+Lancer le script de la fa&ccedil;on suivante : <br /><code>&lt;script type="text/javascript"&gt;agenda_solomo(agence_id,reference_interne,options);&lt;/script&gt;</code></p>
+<p>o&ugrave; :
+    <br />- "<strong>agence_id</strong>" est l'identifiant qui vous a &eacute;t&eacute; fourni lors de votre inscription
+    <br />- "<strong>reference_interne</strong>" est &eacute;gal &agrave; la r&eacute;f&eacute;rence pass&eacute;e lors de l'import du bien via le webservice AgendaSolomo (ou le numero de mandat si le bien a &eacute;t&eacute; import&eacute; par le webservice de Apimo)
+    <br />- "<strong>options</strong>" est <i>false</i> ou un objet définissant les options d'affichage</p>
+
+</li></ol>
+                        </p> 
+                        <br />  <b>Options</b>
+                        <p>
+                            L'affichage du bouton peut être configuré au travers d'un objet d'options passé lors de l'intialisation.
+                            <br>Les options définies par défaut sont les suivantes :
+                            <br>
+                            <code>
+                                <br/> const default_options = {
+                                 <div style="margin-left:30px;margin-top:0">   styles_container:
+                                        "position:absolute;width: 380px;height:100px;top:75px;right:0px;z-index:999",
+                                        <br/>styles_button:<br/>
+                                        "border-radius:60px 0px 0px 60px;text-decoration:none;padding: 0 15px;text-align: center;display: flex;align-items: center;justify-content: space-around;font-size: 25px;font-family: Arial;font-weight: bolder;",
+                                    styles_icon: "width: 28%; height: auto;",  <br/>
+                                    text: "RENDEZ-VOUS VISITE",<br/>
+                                    theme_logo: "light",<br/>
+                                    bgcolor: "#ff2127",<br/>
+                                    color: "#fff"</div><br/>
+                                  };  
+                            </code>
+                        </p>
+                      <br />  <b>IMPORTANT</b>
 <p>Dans l'interface agendasolomo le bien doit disposer de l'autorisation de prise de rendez-vous.</p>
 <img src="img1.png" style="width:100%;border:1px solid black">
 <br /><br />Sans quoi le bouton n'apparaitra pas (pas de prise de rdv autoris&eacute;e)</div>
-</body>
-</html>
+
+
+                        </div>
+                             </div>
+                             </div>
+                             </div>  </div>
