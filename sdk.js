@@ -1,10 +1,10 @@
 /**************
  * SDK SolomoBooking
- * version : 0.5
- * date : 27/08/2021
+ * version : 0.6
+ * date : 16/09/2021
  */
 
-function solomo_xhr(type, url, data, options) {
+function agendaimmo_xhr(type, url, data, options) {
   options = options || {};
   var request = new XMLHttpRequest();
   request.open(type, url, true);
@@ -17,7 +17,7 @@ function solomo_xhr(type, url, data, options) {
   request.onreadystatechange = function () {
     if (this.readyState === 4) {
       if (this.status >= 200 && this.status < 400) {
-        options.success && options.success(solomo_parse(this.responseText));
+        options.success && options.success(agendaimmo_parse(this.responseText));
       } else {
         options.error && options.error(this.status);
       }
@@ -26,7 +26,7 @@ function solomo_xhr(type, url, data, options) {
   request.send(data);
 }
 
-function solomo_parse(text) {
+function agendaimmo_parse(text) {
   try {
     return JSON.parse(text);
   } catch (e) {
@@ -34,7 +34,7 @@ function solomo_parse(text) {
   }
 }
 
-function call_solomo(data, options) {
+function call_agendaimmo(data, options) {
   if (data.bien_id === false) return; // no corresponding URL
   let img_src;
   switch (options.theme_logo) {
@@ -73,7 +73,7 @@ function call_solomo(data, options) {
   document.body.appendChild(div);
 }
 
-function agenda_solomo(agence_id, ref_interne, user_options = false) {
+function agendaimmo(agence_id, ref_interne, user_options = false) {
   let options;
   if(user_options ===  false) options = default_options;
   else {
@@ -83,12 +83,12 @@ function agenda_solomo(agence_id, ref_interne, user_options = false) {
     });
   }
 
-  wwwroot = "https://agendasolomo.com";
+  wwwroot = "https://agendaimmo.com";
   window.addEventListener("load", () => {
     let endpoint = wwwroot + "/biens/check/" + agence_id;
-    call_solomo({ bien_id: 842 }, options);
+    call_agendaimmo({ bien_id: 842 }, options);
     solomo_xhr("POST", endpoint, "u=" + ref_interne, {
-      success: (r) => call_solomo(r, options),
+      success: (r) => call_agendaimmo(r, options),
     });
   });
 }
