@@ -1,7 +1,7 @@
 /**************
  * SDK SolomoBooking
- * version : 0.6
- * date : 16/09/2021
+ * version : 0.7
+ * date : 28/12/2021
  */
 
 function agendaimmo_xhr(type, url, data, options) {
@@ -83,11 +83,10 @@ function agendaimmo(agence_id, ref_interne, user_options = false) {
     });
   }
 
-  wwwroot = "https://agendaimmo.com";
+  wwwroot = "https://pro.agendaimmo.com";
   window.addEventListener("load", () => {
-    let endpoint = wwwroot + "/biens/check/" + agence_id;
-    call_agendaimmo({ bien_id: 842 }, options);
-    solomo_xhr("POST", endpoint, "u=" + ref_interne, {
+    let endpoint = wwwroot + "/biens/check/" + agence_id;    
+    agendaimmo_xhr("POST", endpoint, "u=" + ref_interne, {
       success: (r) => call_agendaimmo(r, options),
     });
   });
