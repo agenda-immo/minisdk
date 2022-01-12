@@ -1,7 +1,7 @@
 /**************
  * SDK SolomoBooking
- * version : 0.7
- * date : 28/12/2021
+ * version : 0.8
+ * date : 12/01/2022
  */
 
 function agendaimmo_xhr(type, url, data, options) {
@@ -70,7 +70,10 @@ function call_agendaimmo(data, options) {
     "</a></div>";
   let div = document.createElement("div");
   div.innerHTML = button_code;
-  document.body.appendChild(div);
+  if(options.id){
+    const target = document.getElementById(options.id)
+    target.appendChild(div)
+  } else document.body.appendChild(div);
 }
 
 function agendaimmo(agence_id, ref_interne, user_options = false) {
