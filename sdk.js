@@ -1,10 +1,10 @@
 /**************
  * SDK SolomoBooking
- * version : 0.9
- * date : 17/01/2022
+ * version : 0.91
+ * date :22/02/2022
  */
 
-function agendaimmo_xhr(type, url, data, options) {
+ function agendaimmo_xhr(type, url, data, options) {
   options = options || {};
   var request = new XMLHttpRequest();
   request.open(type, url, true);
@@ -70,7 +70,7 @@ function agendaimmo_generate_button(data, options) {
     "</a></div>";
   let div = document.createElement("div");
   div.innerHTML = button_code;
-  if(options.id){
+  if(options.id){    
     const target = document.getElementById(options.id)
     target.appendChild(div)
   } else document.body.appendChild(div);
@@ -78,9 +78,9 @@ function agendaimmo_generate_button(data, options) {
 
 function agendaimmo(agence_id, ref_interne, user_options = false) {
   let options;
-  if(user_options ===  false) options = default_options;
+  if(user_options ===  false) options = JSON.parse(JSON.stringify(default_options));
   else {
-    options = default_options;
+    options = JSON.parse(JSON.stringify(default_options));
     Object.keys(user_options).forEach(key => {
       options[key] = user_options[key];      
     });
@@ -97,9 +97,9 @@ function agendaimmo(agence_id, ref_interne, user_options = false) {
 
 function agendaimmo_negociateur(agence_id, negoEmailOrPhone, user_options = false) {
   let options;
-  if(user_options ===  false) options = default_options;
+  if(user_options ===  false) options = JSON.parse(JSON.stringify(default_options));
   else {
-    options = default_options;
+    options = JSON.parse(JSON.stringify(default_options));
     Object.keys(user_options).forEach(key => {
       options[key] = user_options[key];      
     });
