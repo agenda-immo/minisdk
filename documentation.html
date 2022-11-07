@@ -1,61 +1,512 @@
-<h1 style="margin-top: 50px;">Intégration du bouton de prise de rendez-vous à votre CMS existant</h1>
-<p>
-Le SDK que nous fournissons permet d'afficher automatiquement le bouton de prise de rendez-vous AgendaSolomo pour un bien spécifique. 
-<br>Afin d'avoir une version toujours à jour,
- il est fortement conseillé d'inclure le SDK à partir du CDN (https://cdn.jsdelivr.net/gh/agenda-immo/minisdk@main/sdk.min.js). A défaut, vous pouvez le télécharger <a href="https://github.com/agenda-immo/minisdk">sur GitHub</a> </p>
-<div class="panel-group heading-facture" role="tablist" aria-multiselectable="true" style="margin-top: 10px;">
-                    <div class="panel panel-default">                    
-                        <div class="panel-heading" role="tab" id="headingOne">
-                            <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#facture2018" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
-                                Comment mettre en place le SDK AgendaSolomo?
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="facture2018" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
-                            <div class="panel-body"> 
-                              <p>
-                              
-Sa mise est place est très simple : 
-<ol style="margin-left:15px">
-<li>Inclure le script dans votre page, de préférence en passant par le CDN : <br>
-<code>&lt;script type="text/javascript" src="https://cdn.jsdelivr.net/gh/agenda-immo/minisdk@main/sdk.min.js"&gt;&lt;/script&gt;</code>
-</li>
-<li>
-Lancer le script de la fa&ccedil;on suivante : <br /><code>&lt;script type="text/javascript"&gt;agenda_solomo(agence_id,reference_interne,options);&lt;/script&gt;</code></p>
-<p>o&ugrave; :
-    <br />- "<strong>agence_id</strong>" est l'identifiant qui vous a &eacute;t&eacute; fourni lors de votre inscription
-    <br />- "<strong>reference_interne</strong>" est &eacute;gal &agrave; la r&eacute;f&eacute;rence pass&eacute;e lors de l'import du bien via le webservice AgendaSolomo (ou le numero de mandat si le bien a &eacute;t&eacute; import&eacute; par le webservice de Apimo)
-    <br />- "<strong>options</strong>" est <i>false</i> ou un objet définissant les options d'affichage</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Documentation | SDK Agenda immo</title>
+    <script src="./sdk.min.js"></script>
+  </head>
 
-</li></ol>
-                        </p> 
-                        <br />  <b>Options</b>
-                        <p>
-                            L'affichage du bouton peut être configuré au travers d'un objet d'options passé lors de l'intialisation.
-                            <br>Les options définies par défaut sont les suivantes :
-                            <br>
-                            <code>
-                                <br/> const default_options = {
-                                 <div style="margin-left:30px;margin-top:0">   styles_container:
-                                        "position:absolute;width: 380px;height:100px;top:75px;right:0px;z-index:999",
-                                        <br/>styles_button:<br/>
-                                        "border-radius:60px 0px 0px 60px;text-decoration:none;padding: 0 15px;text-align: center;display: flex;align-items: center;justify-content: space-around;font-size: 25px;font-family: Arial;font-weight: bolder;",
-                                    styles_icon: "width: 28%; height: auto;",  <br/>
-                                    text: "RENDEZ-VOUS VISITE",<br/>
-                                    theme_logo: "light",<br/>
-                                    bgcolor: "#ff2127",<br/>
-                                    color: "#fff"</div><br/>
-                                  };  
-                            </code>
-                        </p>
-                      <br />  <b>IMPORTANT</b>
-<p>Dans l'interface agendasolomo le bien doit disposer de l'autorisation de prise de rendez-vous.</p>
-<img src="img1.png" style="width:100%;border:1px solid black">
-<br /><br />Sans quoi le bouton n'apparaitra pas (pas de prise de rdv autoris&eacute;e)</div>
+  <body>
+    <main class="main">
+      <div class="logo">
+        <img src="./public/agenda-immo_logobig.png" alt="logo" />
+      </div>
+      <h1>
+        Notice d'intégration boutons de « prise de rendez-vous en ligne »&nbsp;
+        Estimation, Bien spécifique et Négociateur Spécifique et agence
+      </h1>
+      <p class="bold">
+        À destination du <span class="highlight">webmaster</span> du site
+        immobilier.
+      </p>
 
+      <p>
+        Agenda Immo&nbsp;est une solution 100% web permettant aux agences
+        immobilières d'offrir la prise de rendez-vous en ligne sur leur site
+        agence. Nous offrons 4 types prise de rendez-vous en ligne :&nbsp;
+      </p>
+      <ol class="list">
+        <li>
+          <a href="#bouton_estimation">
+            Bouton <span class="bold">RENDEZ-VOUS ESTIMATION</span>
+          </a>
+        </li>
+        <li>
+          <a href="#bouton_sdk_visite">
+            Bouton 
+            <span class="bold"> RENDEZ-VOUS VISITE POUR UN BIEN SPÉCIFIQUE</span>
+          </a>
+        </li>
+        <li>
+          <a href="#bouton_sdk_nego">
+            Bouton 
+            <span class="bold">RENDEZ-VOUS AVEC NÉGOCIATEUR SPÉCIFIQUE</span>
+          </a>
+        </li>
+        <li>
+          <a href="#bouton_simple_agence">
+            Bouton  <span class="bold">RENDEZ-VOUS AGENCE</span>
+          </a>
+        </li>
+      </ol>
 
-                        </div>
-                             </div>
-                             </div>
-                             </div>  </div>
+      <h3>Pour ajouter Agenda Immo à votre site</h3>
+      <p>Intégrez le code suivant pour beneficier de tous les boutons.</p>
+      <p>
+        Dans la section <span class="highlight">Head</span> de votre site,
+        ajoutez le code suivant :
+      </p>
+      <code>
+        &lt;script type="text/javascript"
+        src="https://cdn.jsdelivr.net/gh/agenda-immo/minisdk@main/sdk.min.js"&gt;&lt;/script&gt;
+      </code>
+
+      <h2 id="bouton_estimation">
+        1 - Bouton de prise de rendez-vous Estimation&nbsp;:
+      </h2>
+      <p id="button_first" class="flex_center"></p>
+      <script>
+        agendaimmo_estimation("http://pro.agendaimmo.com", {
+          id: "button_first",
+          text: "rendez-vous estimation",
+        });
+      </script>
+      <p>
+        Le bouton «&nbsp;rendez-vous estimation&nbsp;», à destination de la page
+        estimation ou gestion de biens locatifs pour le prospect vendeur ou
+        bailleur.
+      </p>
+
+      <p>À destination de&nbsp;:</p>
+      <ul>
+        <li>
+          <p>
+            la page estimation vente (vendeur) et qui redirigera vers l'url :
+            <span class="highlight"
+              >https://pro.agendaimmo.com/rdvs/estimation/<b>nom-agence</b>/vente</span
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            la page estimation location (bailleur) et qui redirigera vers
+            l'url&nbsp;:
+            <span class="highlight"
+              >https://pro.agendaimmo.com/rdvs/estimation/<b>nom-agence</b>/location</span
+            >
+          </p>
+        </li>
+        <li>
+          ou/et d'une landing page demandant au client si il désire une
+          estimation pour un bien en vente ou en location ( ex page estimation
+          générale et page d'accueil de votre site ) &nbsp;redirigeant vers
+          l'url :&nbsp;<span class="highlight"
+            >hhttps://pro.agendaimmo.com/rdvs/estimation/<b>nom-agence</b></span
+          >
+        </li>
+      </ul>
+      <p>
+        <i
+          >La variable : <span class="highlight">nom-agence</span> se trouve
+          dans la fiche agence qui vous a été transmise après votre
+          inscription.</i
+        >
+      </p>
+
+      <h3>Code d'intégration</h3>
+
+      <code
+        >&lt;script&gt;
+        <div class="indent">
+          agendaimmo_estimation("<span class="highlight"
+            >votre lien estimation</span
+          >")
+        </div>
+        &lt;/script&gt;
+      </code>
+
+      <h2 id="bouton_sdk_visite">
+        2 - Bouton de prise de rendez-vous pour visiter un bien 
+        spécifique&nbsp;:
+      </h2>
+
+      <p id="button_second" class="flex_center"></p>
+      <script>
+        agendaimmo("82", "6023 AR", { id: "button_second" });
+      </script>
+
+      <p>
+        Ce bouton 
+        &nbsp; est à destination de la page bien concernant la vente ou la
+        location pour le prospect acquéreur ou locataire. Ce lien permet
+        d'attribuer le rendez-vous à/aux négociateur(s) en charge du bien tout
+        en prenant compte de leurs disponibilités ainsi que de celles du bien
+        (vendeur ou résident).
+      </p>
+     <!-- <p>
+        A défaut, vous pouvez le télécharger
+        <a href="https://github.com/agenda-immo/minisdk">sur GitHub</a>.
+      </p>-->
+
+    
+
+      <h3>Code d'intégration</h3>
+<code>
+            &lt;script type="text/javascript"&gt;agendaimmo(<span
+              class="highlight"
+              >agence_id</span
+            >,<span class="highlight">reference_interne</span>,<span
+              class="highlight"
+              >options</span
+            >);&lt;/script&gt;
+          </code>
+          <b>Paramètres</b>
+      <ul> 
+        <li>
+          <span class="highlight">agence_id</span>: est l'identifiant qui vous a
+          &eacute;t&eacute; fourni lors de votre inscription
+        </li>
+        <li>
+          <span class="highlight">reference_interne</span>: est la référence
+          passée lors de l'import du bien via le webservice
+          <span class="highlight">AgendaImmo</span>. 
+        </li>
+
+        <li>
+          <span class="highlight">options</span>: vous permet de modifier
+          l'affichage
+        </li>
+      </ul>
+
+      <h2 id="bouton_sdk_nego">
+        3- Bouton de prise de rendez-vous avec un négociateur spécifique
+      </h2>
+
+      <p id="button_nego" class="flex_center"></p>
+      <script>
+        const default_options = {id: "button_nego",
+        styles_container : "background:transparent;",
+styles_button:
+"color:#000;text-transform:none;text-decoration:none;text-align: left;font-size: 16px;font-family: Arial;font-weight: bolder;",
+text: "Prendre rendez-vous",
+theme_logo: "light",
+}; 
+        agendaimmo_negociateur("82", "06", default_options);
+      </script>
+
+      <h3>Code d'intégration</h3>
+         <code>
+            &lt;script type="text/javascript"&gt;
+            <br>  
+            const options = {<br>
+              &nbsp;&nbsp; id: "button_nego",<br>
+              &nbsp;&nbsp; styles_container : "background:transparent;",<br>
+              &nbsp;&nbsp; styles_button:
+              "color:#000;text-transform:none;text-decoration:none;text-align: left;font-size: 16px;font-family: Arial;font-weight: bolder;",
+              <br>  &nbsp;&nbsp; text: "Prendre rendez-vous",
+              <br> &nbsp;&nbsp; theme_logo: "light"     <br>     
+};  <br>  <br>
+            agendaimmo_negociateur(<span
+              class="highlight"
+              >agence_id</span
+            >,<span class="highlight">email ou n° de téléphone</span>,<span
+              class="highlight"
+              >options</span
+            >); <br>&lt;/script&gt;
+          </code>
+          <b>Paramètres</b>
+      <ul>        
+        <li>
+          <span class="highlight">agence_id</span>: est l'identifiant qui vous a
+          &eacute;t&eacute; fourni lors de votre inscription
+        </li>
+        <li>
+          <span class="highlight">adresse email ou numero de telephone</span>: l'adresse email ou le numéro de téléphone renseigné(e) dans le profil AgendaImmo du négociateur
+        
+        </li>
+
+        <li>
+          <span class="highlight">options</span>: vous permet de modifier
+          l'affichage
+        </li>
+      </ul>
+
+      <h2 id="bouton_simple_agence">
+        4- Bouton prise de rendez-vous Agence
+      </h2>
+      <p>
+        Le bouton &nbsp;« <span class="highlight">Rendez-vous agence</span>»
+        &nbsp; permet de prendre rendez-vous avec l’un des membres de l’agence
+        au choix. (Page de destination à valider avec le client).
+      </p>
+      <p></p>
+      <p id="simple_agence" class="flex_center"></p>
+      <script>
+        agendaimmo_agence("29", {
+          id: "simple_agence",
+        });
+      </script>
+
+      <h3>Code d'intégration</h3>
+ <code>
+            &lt;script type="text/javascript"&gt;agendaimmo_agence(<span
+              class="highlight"
+              >agence_id</span
+            >, <span class="highlight">options</span>);&lt;/script&gt;
+          </code>
+
+      <b>Paramètres</b>
+      <ul>   
+        <li>
+          <span class="highlight">agence_id</span>: est l'identifiant qui vous
+          a &eacute;t&eacute; fourni lors de votre inscription
+        </li>
+        <li>
+          <span class="highlight">options</span>: vous permet de modifier
+          l'affichage
+        </li>
+      </ul>
+
+      <h3>Options</h3>
+      <p>
+        L'affichage du bouton peut être configuré au travers d'un objet
+        d'options passé lors de l'intialisation.
+      </p>
+      <p>Les options définies par défaut sont les suivantes :</p>
+      <code>
+        <br />
+        const default_options = {
+        <div class="indent">
+          styles_container: "position:absolute;width:
+          380px;height:100px;top:75px;right:0px;z-index:999",
+          <br />styles_button:<br />
+          "border-radius:60px 0px 0px 60px;text-decoration:none;padding: 0
+          15px;text-align: center;display: flex;align-items:
+          center;justify-content: space-around;font-size: 25px;font-family:
+          Arial;font-weight: bolder;", styles_icon: "width: 28%; height: auto;",
+          <br />
+          text: "rendez-vous visite",<br />
+          theme_logo: "light",<br />
+        </div>
+        };
+      </code>
+      <h2>Exemples</h2>
+      <p>Les exemples suivants s'appliquent à tous les boutons.</p>
+
+      <h3>Mode sombre</h3>
+      <p id="dark_mode" class="flex_center dark"></p>
+      <script>
+        agendaimmo("82", "6023 AR", { id: "dark_mode", theme_logo: "dark" });
+      </script>
+      <code>
+        &lt;script type="text/javascript"&gt;
+        <br />agendaimmo(<span class="highlight">agence_id</span>,<span class="highlight">reference_interne</span>,{ theme_logo:
+        "dark"})
+        <br />
+        &lt;/script&gt;
+      </code>
+
+      <h3>Changer la couleur du bouton</h3>
+      <p id="colors" class="flex_center"></p>
+      <script>
+        agendaimmo("82", "6023 AR", {
+          id: "colors",
+          styles_container: { background: "#183c63" },
+        });
+      </script>
+      <code>
+        &lt;script type="text/javascript"&gt;
+        <br />agendaimmo(<span class="highlight">agence_id</span>,<span class="highlight">reference_interne</span>,{styles_container: {background: '#183c63'}})
+        <br />
+        &lt;/script&gt;
+      </code>
+
+      <h3>Modifier l'affichage</h3>
+      <p id="change" class="flex_center"></p>
+      <script>
+        agendaimmo("82", "6023 AR", {
+          id: "change",
+          text: "Mon texte personnalisé",
+          styles_container: { borderRadius: "5px", padding: "5px" },
+          styles_button: { textTransform: "lowercase" },
+        });
+      </script>
+      <code>
+        &lt;script type="text/javascript"&gt;
+        <br />agendaimmo(<span class="highlight">agence_id</span>,<span class="highlight">reference_interne</span>,{
+          text: "Mon texte personnalisé",<br/>
+          styles_container: { borderRadius: "5px", padding: "5px" },<br/>
+          styles_button: { textTransform: "lowercase" },<br/>
+        })
+        <br />
+        &lt;/script&gt;
+      </code>
+
+      <section class="center">
+        <p>
+          N’hésitez pas à nous contacter si vous avez la moindre question. Nous
+          sommes à votre disposition pour toute information complémentaire
+        </p>
+        <p>
+          <a href="mailto:contact@agendaimmo.com">contact@agendaimmo.com</a>
+        </p>
+        <p>
+          <a href="tel:0695207598">06 95 20 75 98</a>
+        </p>
+      </section>
+
+    </main>
+  </body>
+  <style>
+    :root {
+      --color-ai: #0e9b25;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: sans-serif;
+    }
+
+    .flex_center {
+      display: flex;
+      justify-content: center;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    .dark {
+      padding: 15px;
+      background: rgb(22, 22, 22);
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .logo img {
+      width: 200px;
+    }
+
+    .list {
+      color: var(--color-ai);
+    }
+
+    .list a {
+      text-decoration: none;
+    }
+
+    .main {
+      max-width: 600px;
+      display: flex;
+      gap: 15px;
+      flex-direction: column;
+      padding-bottom: 20px;
+    }
+
+    h1 {
+      color: var(--color-ai);
+      text-align: center;
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    h2 {
+      color: var(--color-ai);
+      font-size: 1.3em;
+      margin: 10px 0 0;
+    }
+
+    h3 {
+      margin: 10px 0 0;
+    }
+
+    h2 > a {
+      color: var(--color-ai);
+      text-decoration: none;
+    }
+
+    a {
+      color: var(--color-ai);
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: var(--color-ai);
+    }
+
+    ol,
+    ul {
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    code {
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      padding: 5px;
+      margin: 5px 0;
+      overflow-y: auto;
+    }
+
+    .screenshot {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .indent {
+      padding-left: 15px;
+    }
+
+    .highlight {
+      word-break: break-all;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    @media screen and (max-width: 650px) {
+      h1 {
+        font-size: 1.4em;
+      }
+
+      .main {
+        max-width: calc(100% - 50px);
+      }
+
+      code {
+        width: calc(100% - 20px);
+      }
+
+      ul,
+      ol {
+        padding-left: 10px;
+      }
+    }
+  </style>
+</html>
+
