@@ -29,24 +29,31 @@
       <ol class="list">
         <li>
           <a href="#bouton_estimation">
-            Bouton <span class="bold">RENDEZ-VOUS ESTIMATION</span>
+            1. Bouton <span class="bold">RENDEZ-VOUS ESTIMATION</span>
           </a>
         </li>
         <li>
           <a href="#bouton_sdk_visite">
-            Bouton 
-            <span class="bold"> RENDEZ-VOUS VISITE POUR UN BIEN SPÉCIFIQUE</span>
+            2. Bouton
+            <span class="bold">
+            RENDEZ-VOUS VISITE POUR UN BIEN SPÉCIFIQUE</span>
+          </a>
+        </li>
+        <li>
+          <a href="#bouton_sdk_nego_spe">
+            3. Bouton fixe
+            <span class="bold">RENDEZ-VOUS AVEC NÉGOCIATEUR SPÉCIFIQUE</span>
           </a>
         </li>
         <li>
           <a href="#bouton_sdk_nego">
-            Bouton 
+            3.1. Bouton
             <span class="bold">RENDEZ-VOUS AVEC NÉGOCIATEUR SPÉCIFIQUE</span>
           </a>
         </li>
         <li>
           <a href="#bouton_simple_agence">
-            Bouton  <span class="bold">RENDEZ-VOUS AGENCE</span>
+            4. Bouton <span class="bold">RENDEZ-VOUS AGENCE</span>
           </a>
         </li>
       </ol>
@@ -67,10 +74,10 @@
       </h2>
       <p id="button_first" class="flex_center"></p>
       <script>
-        agendaimmo_estimation("http://pro.agendaimmo.com", {
-          id: "button_first",
-          text: "rendez-vous estimation",
-        });
+      agendaimmo_estimation('https://pro.agendaimmo.com/rdvs/estimation/agence-test2022', {
+          id: 'button_first',
+          text: 'rendez-vous estimation',
+        })
       </script>
       <p>
         Le bouton «&nbsp;rendez-vous estimation&nbsp;», à destination de la page
@@ -83,86 +90,68 @@
         <li>
           <p>
             la page estimation vente (vendeur) et qui redirigera vers l'url :
-            <span class="highlight"
-              >https://pro.agendaimmo.com/rdvs/estimation/<b>nom-agence</b>/vente</span
-            >
+          <span class="highlight">https://pro.agendaimmo.com/rdvs/estimation/<b>identifiant-agence</b>/vente</span>
           </p>
         </li>
         <li>
           <p>
             la page estimation location (bailleur) et qui redirigera vers
             l'url&nbsp;:
-            <span class="highlight"
-              >https://pro.agendaimmo.com/rdvs/estimation/<b>nom-agence</b>/location</span
-            >
+          <span class="highlight">https://pro.agendaimmo.com/rdvs/estimation/<b>identifiant-agence</b>/location</span>
           </p>
         </li>
         <li>
           ou/et d'une landing page demandant au client si il désire une
           estimation pour un bien en vente ou en location ( ex page estimation
           générale et page d'accueil de votre site ) &nbsp;redirigeant vers
-          l'url :&nbsp;<span class="highlight"
-            >hhttps://pro.agendaimmo.com/rdvs/estimation/<b>nom-agence</b></span
-          >
+        l'url :&nbsp;<span class="highlight">https://pro.agendaimmo.com/rdvs/estimation/<b>identifiant-agence</b></span>
         </li>
       </ul>
       <p>
-        <i
-          >La variable : <span class="highlight">nom-agence</span> se trouve
+      <i>La variable : <span class="highlight">identifiant-agence</span> se trouve
           dans la fiche agence qui vous a été transmise après votre
-          inscription.</i
-        >
+        inscription.</i>
       </p>
 
       <h3>Code d'intégration</h3>
 
-      <code
-        >&lt;script&gt;
+    <code>&lt;script&gt;
         <div class="indent">
-          agendaimmo_estimation("<span class="highlight"
-            >votre lien estimation</span
-          >")
+        agendaimmo_estimation("<span class="highlight">votre lien estimation</span>")
         </div>
         &lt;/script&gt;
       </code>
 
       <h2 id="bouton_sdk_visite">
-        2 - Bouton de prise de rendez-vous pour visiter un bien 
+        2 - Bouton de prise de rendez-vous pour visiter un bien
         spécifique&nbsp;:
       </h2>
 
       <p id="button_second" class="flex_center"></p>
       <script>
-        agendaimmo("82", "6023 AR", { id: "button_second" });
+      agendaimmo('29', 'e235vr', {
+        id: 'button_second'
+      })
       </script>
 
       <p>
-        Ce bouton 
-        &nbsp; est à destination de la page bien concernant la vente ou la
-        location pour le prospect acquéreur ou locataire. Ce lien permet
+        Ce bouton &nbsp; est à destination de la page bien concernant la vente
+        ou la location pour le prospect acquéreur ou locataire. Ce lien permet
         d'attribuer le rendez-vous à/aux négociateur(s) en charge du bien tout
         en prenant compte de leurs disponibilités ainsi que de celles du bien
         (vendeur ou résident).
       </p>
-     <!-- <p>
+      <!-- <p>
         A défaut, vous pouvez le télécharger
         <a href="https://github.com/agenda-immo/minisdk">sur GitHub</a>.
       </p>-->
 
-    
-
       <h3>Code d'intégration</h3>
-<code>
-            &lt;script type="text/javascript"&gt;agendaimmo(<span
-              class="highlight"
-              >agence_id</span
-            >,<span class="highlight">reference_interne</span>,<span
-              class="highlight"
-              >options</span
-            >);&lt;/script&gt;
-          </code>
-          <b>Paramètres</b>
-      <ul> 
+      <code>
+      &lt;script type="text/javascript"&gt;agendaimmo(<span class="highlight">agence_id</span>,<span class="highlight">reference_interne</span>,<span class="highlight">options</span>);&lt;/script&gt;
+      </code>
+      <b>Paramètres</b>
+      <ul>
         <li>
           <span class="highlight">agence_id</span>: est l'identifiant qui vous a
           &eacute;t&eacute; fourni lors de votre inscription
@@ -170,7 +159,7 @@
         <li>
           <span class="highlight">reference_interne</span>: est la référence
           passée lors de l'import du bien via le webservice
-          <span class="highlight">AgendaImmo</span>. 
+          <span class="highlight">AgendaImmo</span>.
         </li>
 
         <li>
@@ -179,51 +168,81 @@
         </li>
       </ul>
 
-      <h2 id="bouton_sdk_nego">
-        3- Bouton de prise de rendez-vous avec un négociateur spécifique
+      <h2 id="bouton_sdk_nego_spe">
+        3 - Bouton de prise de rendez-vous FIXE avec un négociateur spécifique
       </h2>
 
-      <p id="button_nego" class="flex_center"></p>
+      <p id="button_second" class="flex_center"></p>
       <script>
-        const default_options = {id: "button_nego",
-        styles_container : "background:transparent;",
-styles_button:
-"color:#000;text-transform:none;text-decoration:none;text-align: left;font-size: 16px;font-family: Arial;font-weight: bolder;",
-text: "Prendre rendez-vous",
-theme_logo: "light",
-}; 
-        agendaimmo_negociateur("82", "06", default_options);
+      agendaimmo_negociateur('29', '+33683196364', {
+          id: 'bouton_nego_spe',
+        text: 'Prendre rendez-vous',
+        })
       </script>
+      <p id="bouton_nego_spe" class="flex_center"></p>
 
       <h3>Code d'intégration</h3>
-         <code>
-            &lt;script type="text/javascript"&gt;
-            <br>  
-            const options = {<br>
-              &nbsp;&nbsp; id: "button_nego",<br>
-              &nbsp;&nbsp; styles_container : "background:transparent;",<br>
-              &nbsp;&nbsp; styles_button:
-              "color:#000;text-transform:none;text-decoration:none;text-align: left;font-size: 16px;font-family: Arial;font-weight: bolder;",
-              <br>  &nbsp;&nbsp; text: "Prendre rendez-vous",
-              <br> &nbsp;&nbsp; theme_logo: "light"     <br>     
-};  <br>  <br>
-            agendaimmo_negociateur(<span
-              class="highlight"
-              >agence_id</span
-            >,<span class="highlight">email ou n° de téléphone</span>,<span
-              class="highlight"
-              >options</span
-            >); <br>&lt;/script&gt;
-          </code>
-          <b>Paramètres</b>
-      <ul>        
+      <code>
+        &lt;script type="text/javascript"&gt;
+        <br />
+        const options = {<br />
+        text: 'PRENDRE RENDEZ-VOUS' <br />
+        }; <br />
+        <br />
+      agendaimmo_negociateur(<span class="highlight">agence_id</span>,<span class="highlight">email ou n° de téléphone</span>,<span class="highlight">options</span>); <br />&lt;/script&gt;
+      </code>
+      <b>Paramètres</b>
+      <ul>
         <li>
           <span class="highlight">agence_id</span>: est l'identifiant qui vous a
           &eacute;t&eacute; fourni lors de votre inscription
         </li>
         <li>
-          <span class="highlight">adresse email ou numero de telephone</span>: l'adresse email ou le numéro de téléphone renseigné(e) dans le profil AgendaImmo du négociateur
-        
+          <span class="highlight">adresse email ou numero de telephone</span>:
+          l'adresse email ou le numéro de téléphone renseigné(e) dans le profil
+          AgendaImmo du négociateur
+        </li>
+      </ul>
+      <h2 id="bouton_sdk_nego">
+        3.1 - Ajouter le bouton sur une partie de la page
+      </h2>
+
+      <p id="button_nego" class="flex_center"></p>
+    <script>
+      agendaimmo_negociateur('29', '+33683196364', {
+        id: 'button_nego',
+        text: 'Prendre rendez-vous',
+        styles_container: 'background:transparent;',
+        styles_button: 'color:#000;text-transform:none;text-decoration:none;text-align: left;font-size: 16px;font-family: Arial;font-weight: bolder;',
+      })
+    </script>
+      <h3>Code d'intégration</h3>
+      <code>
+        &lt;script type="text/javascript"&gt;
+        <br />
+        const options = {<br />
+        &nbsp;&nbsp; id: "button_nego",<br />
+        &nbsp;&nbsp; styles_container : "background:transparent;",<br />
+        &nbsp;&nbsp; styles_button:
+        "color:#000;text-transform:none;text-decoration:none;text-align:
+        left;font-size: 16px;font-family: Arial;font-weight: bolder;",
+        <br />
+        &nbsp;&nbsp; text: "Prendre rendez-vous", <br />
+        &nbsp;&nbsp; theme_logo: "light" <br />
+        }; <br />
+        <br />
+      agendaimmo_negociateur(<span class="highlight">agence_id</span>,<span class="highlight">email ou n° de téléphone</span>,<span class="highlight">options</span>); <br />&lt;/script&gt;
+      </code>
+      <b>Paramètres</b>
+      <ul>
+        <li>
+          <span class="highlight">agence_id</span>: est l'identifiant qui vous a
+          &eacute;t&eacute; fourni lors de votre inscription
+        </li>
+        <li>
+          <span class="highlight">adresse email ou numero de telephone</span>:
+          l'adresse email ou le numéro de téléphone renseigné(e) dans le profil
+          AgendaImmo du négociateur
         </li>
 
         <li>
@@ -232,9 +251,7 @@ theme_logo: "light",
         </li>
       </ul>
 
-      <h2 id="bouton_simple_agence">
-        4- Bouton prise de rendez-vous Agence
-      </h2>
+      <h2 id="bouton_simple_agence">4- Bouton prise de rendez-vous Agence</h2>
       <p>
         Le bouton &nbsp;« <span class="highlight">Rendez-vous agence</span>»
         &nbsp; permet de prendre rendez-vous avec l’un des membres de l’agence
@@ -243,24 +260,24 @@ theme_logo: "light",
       <p></p>
       <p id="simple_agence" class="flex_center"></p>
       <script>
-        agendaimmo_agence("29", {
-          id: "simple_agence",
-        });
+        const default_options_spe = {
+          id: 'simple_agence',         
+          text: 'RENDEZ-VOUS AGENCE',
+          theme_logo: 'light',
+        }
+      agendaimmo_agence("agence-test2022", default_options_spe);
       </script>
 
       <h3>Code d'intégration</h3>
- <code>
-            &lt;script type="text/javascript"&gt;agendaimmo_agence(<span
-              class="highlight"
-              >agence_id</span
-            >, <span class="highlight">options</span>);&lt;/script&gt;
-          </code>
+      <code>
+      &lt;script type="text/javascript"&gt;agendaimmo_agence(<span class="highlight">identifiant_agence</span>, <span class="highlight">options</span>);&lt;/script&gt;
+      </code>
 
       <b>Paramètres</b>
-      <ul>   
+      <ul>
         <li>
-          <span class="highlight">agence_id</span>: est l'identifiant qui vous
-          a &eacute;t&eacute; fourni lors de votre inscription
+        <span class="highlight">identifiant_agence</span>: est l'identifiant qui vous a
+          &eacute;t&eacute; fourni lors de votre inscription
         </li>
         <li>
           <span class="highlight">options</span>: vous permet de modifier
@@ -297,12 +314,14 @@ theme_logo: "light",
       <h3>Mode sombre</h3>
       <p id="dark_mode" class="flex_center dark"></p>
       <script>
-        agendaimmo("82", "6023 AR", { id: "dark_mode", theme_logo: "dark" });
+      agendaimmo('29', 'e235vr', {
+        id: 'dark_mode',
+        theme_logo: 'dark'
+      })
       </script>
       <code>
         &lt;script type="text/javascript"&gt;
-        <br />agendaimmo(<span class="highlight">agence_id</span>,<span class="highlight">reference_interne</span>,{ theme_logo:
-        "dark"})
+      <br />agendaimmo(<span class="highlight">agence_id</span>,<span class="highlight">reference_interne</span>,{ theme_logo: "dark"})
         <br />
         &lt;/script&gt;
       </code>
@@ -310,14 +329,16 @@ theme_logo: "light",
       <h3>Changer la couleur du bouton</h3>
       <p id="colors" class="flex_center"></p>
       <script>
-        agendaimmo("82", "6023 AR", {
-          id: "colors",
-          styles_container: { background: "#183c63" },
-        });
+        agendaimmo('29', 'e235vr', {
+          id: 'colors',
+        styles_container: {
+          background: '#183c63'
+        },
+        })
       </script>
       <code>
         &lt;script type="text/javascript"&gt;
-        <br />agendaimmo(<span class="highlight">agence_id</span>,<span class="highlight">reference_interne</span>,{styles_container: {background: '#183c63'}})
+      <br />agendaimmo(<span class="highlight">agence_id</span>,<span class="highlight">reference_interne</span>,{styles_container: {background: '#183c63'}})
         <br />
         &lt;/script&gt;
       </code>
@@ -325,19 +346,23 @@ theme_logo: "light",
       <h3>Modifier l'affichage</h3>
       <p id="change" class="flex_center"></p>
       <script>
-        agendaimmo("82", "6023 AR", {
-          id: "change",
-          text: "Mon texte personnalisé",
-          styles_container: { borderRadius: "5px", padding: "5px" },
-          styles_button: { textTransform: "lowercase" },
-        });
+        agendaimmo('29', 'e235vr', {
+          id: 'change',
+          text: 'Mon texte personnalisé',
+        styles_container: {
+          borderRadius: '5px',
+          padding: '5px'
+        },
+        styles_button: {
+          textTransform: 'lowercase'
+        },
+        })
       </script>
       <code>
         &lt;script type="text/javascript"&gt;
-        <br />agendaimmo(<span class="highlight">agence_id</span>,<span class="highlight">reference_interne</span>,{
-          text: "Mon texte personnalisé",<br/>
-          styles_container: { borderRadius: "5px", padding: "5px" },<br/>
-          styles_button: { textTransform: "lowercase" },<br/>
+      <br />agendaimmo(<span class="highlight">agence_id</span>,<span class="highlight">reference_interne</span>,{ text: "Mon texte personnalisé",<br />
+        styles_container: { borderRadius: "5px", padding: "5px" },<br />
+        styles_button: { textTransform: "lowercase" },<br />
         })
         <br />
         &lt;/script&gt;
@@ -355,7 +380,6 @@ theme_logo: "light",
           <a href="tel:0695207598">06 95 20 75 98</a>
         </p>
       </section>
-
     </main>
   </body>
   <style>
@@ -454,6 +478,11 @@ theme_logo: "light",
       margin: 0;
     }
 
+    ol {
+      list-style-type: none;
+      padding-left: 15px;
+    }
+
     li {
       margin-bottom: 10px;
     }
@@ -489,6 +518,15 @@ theme_logo: "light",
       text-align: center;
     }
 
+    .button {
+      border-radius: 20px;
+      padding: 10px 20px;
+      margin: 10px auto;
+      background: var(--color-ai);
+      color: white;
+      cursor: pointer;
+    }
+
     @media screen and (max-width: 650px) {
       h1 {
         font-size: 1.4em;
@@ -508,5 +546,5 @@ theme_logo: "light",
       }
     }
   </style>
-</html>
 
+</html>
